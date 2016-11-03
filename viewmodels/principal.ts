@@ -11,7 +11,16 @@ export class Principal{
     contactoAtual: KnockoutObservable<string>;
     tipoContactoAtual: KnockoutObservable<TipoContacto>;
     
-    
+    carregaAlunos(){
+        let aluno1 = new Aluno("Luis");
+        aluno1.adicionaContacto(Contacto.criaEmail("teste@mail.pt"));
+        aluno1.adicionaContacto(Contacto.criaTelefone("123123123"));
+        this.alunos.push(aluno1);
+        aluno1 = new Aluno("Rita");
+        aluno1.adicionaContacto(Contacto.criaEmail("teste@mail.pt"));
+        aluno1.adicionaContacto(Contacto.criaTelefone("123123123"));
+        this.alunos.push(aluno1);
+    }
     
     preparaBindings(){
         this.nomeAtual = ko.observable("").extend({
