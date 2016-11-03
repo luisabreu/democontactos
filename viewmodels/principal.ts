@@ -5,7 +5,7 @@ import {Aluno, Contacto, TipoContacto} from "../modelos/index";
 import {ServicoAlunos} from "../servicos/servico-alunos";
 
 export class Principal{
-    alunos: Aluno[] = [];
+    alunos: KnockoutObservable<Aluno[]>;
     alunoAtual:Aluno;
 
     nomeAtual:KnockoutObservable<string>;
@@ -14,11 +14,13 @@ export class Principal{
     contactos: KnockoutObservable<Contacto[]>;
     
     constructor(private servico: ServicoAlunos){
+         this.preparaBindings();
          this.servico.obtemTodos()
-            .then(als => this.alunos = als);
+            .then(als => this.alunos(als) );
     }
     
     preparaBindings(){
+        this.alunos = ko.observable([]);
         this.nomeAtual = ko.observable("").extend({
             required: true
         });

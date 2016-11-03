@@ -31,27 +31,18 @@
             </form>
             
             <div class="row">
-                <ul class="list-unstyled margens">
+                <ul class="list-unstyled margens" data-bind="foreach: alunos">
                     <li>
                         <div class="col-xs-12">
                             <div class="checkbox">
                                 <input type="checkbox">
                             </div>
-                            <a href="#">
-                                <span class="text-left">Nome de contacto 1</span>
+                            <a href="#" data-bind="click: $parent.selecionaAluno.bind($parent)">
+                                <span class="text-left" data-bind="text: nome"></span>
+                                <span class="badge" data-bind="text: contactos.length"></span>
                             </a>
                         </div>
-                    </li>
-                    <li>
-                        <div class="col-xs-12">
-                            <div class="checkbox">
-                                <input type="checkbox">
-                            </div>
-                            <a href="#">
-                                <span class="text-left">Nome de contacto 2</span>
-                            </a>
-                        </div>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
             </fieldset>
@@ -63,7 +54,9 @@
                     <div class="form-group">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-10">
-                            <input type="text" name="nome" id="nome" class="form-control" placeholder="Introduza o nome do contacto">
+                            <input type="text" name="nome" id="nome" class="form-control"
+                                data-bind="value: nomeAtual"
+                                placeholder="Introduza o nome do contacto">
                         </div>
                     </div>
                     <hr>
@@ -124,5 +117,11 @@
     <script src="node_modules/knockout/build/output/knockout-latest.js"></script>
     <script src="node_modules/knockout-validation/dist/knockout-validation.js"></script>
     <script src="node_modules/knockout-mapping/dist/knockout.mapping.min.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="js/systemjs.config.js"></script>
+    <script>
+        System.import("app")
+            .catch(err => console.error(err));
+    </script>
 </body>
 </html>

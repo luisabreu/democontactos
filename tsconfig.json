@@ -1,13 +1,18 @@
 {
-    "compileOnSave": true,
      "compilerOptions": {
         "target": "es2015",
         "outDir": "js",
-        "sourceMap": true,
+        "inlineSourceMap":true,
         "watch": false,
-        "module": "es2015",
-        "traceResolution": true,
-        "strictNullChecks": true
-    }
+        "module": "commonjs",
+        "strictNullChecks": true,
+        "moduleResolution": "node"        
+    },
+    "exclude": [
+       "node_modules",
+        "wwwroot",
+        "typings/index",
+        "typings/index.d.ts"
+    ]
 
 }
