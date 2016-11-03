@@ -5,8 +5,116 @@
     <title>Lista de contactos</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">Contactos</a>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="col-sm-4 col-xs-12 lista sidebar">
+            <fieldset class="lista">
+                <legend>Contactos existentes:</legend>   
+            <form action="." class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input type="text" id="filtro" class="form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="row">
+                <ul class="list-unstyled margens">
+                    <li>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <a href="#">
+                                <span class="text-left">Nome de contacto 1</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <a href="#">
+                                <span class="text-left">Nome de contacto 2</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </fieldset>
+        </div>
+        <div class="col-sm-offset-5 col-sm-7 col-xs-12">
+            <fieldset>
+                <legend>Dados de contacto:</legend>            
+                <form action="." class="form-horizontal">
+                    <div class="form-group">
+                        <label for="nome" class="col-sm-2 control-label">Nome:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nome" id="nome" class="form-control" placeholder="Introduza o nome do contacto">
+                        </div>
+                    </div>
+                    <hr>
+                    <h4>Lista de contactos</h4>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tipo:</label>
+                        <div class="col-sm-3">                       
+                            <label class="radio-inline">
+                                <input type="radio" name="tipo" id="tipoTelefone" value="1"> Tel.
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipo" id="tipoEmail" value="1"> Email
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="registo" id="registo" class="form-control" placeholder="Introduza o contacto">
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                            </button>
+                        </div>
+                    </div>                  
+                </form>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td class="col-sm-7">Contacto</td>
+                                <td class="col-sm-4">Tipo</td>
+                                <td class="col-sm-1"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>123123123</td>
+                                <td>Telefone</td>
+                                <td>
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-remove-sign text-danger"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
