@@ -8,10 +8,14 @@
     "jquery": "^3.1.1"
   },
   "devDependencies": {
+    "concurrently": "^3.1.0",
     "lite-server": "^2.2.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" "
   },
   "repository": {
     "type": "git",
