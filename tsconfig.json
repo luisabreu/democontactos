@@ -1,0 +1,11 @@
+{
+    "compileOnSave": true,
+     "compilerOptions": {
+        "target": "ES2015",
+        "outDir": "js",
+        "sourceMap": true,
+        "watch": false,
+        "traceResolution": true
+    }
+
+}
