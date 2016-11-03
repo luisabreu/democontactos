@@ -5,6 +5,7 @@
         "outDir": "js",
         "sourceMap": true,
         "watch": false,
+        "module": "es2015",
         "traceResolution": true,
         "strictNullChecks": true
     }

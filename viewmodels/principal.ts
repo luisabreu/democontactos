@@ -2,24 +2,20 @@
 
 
 import {Aluno, Contacto, TipoContacto} from "../modelos/index";
+import {ServicoAlunos} from "../servicos/servico-alunos";
 
 export class Principal{
     alunos: Aluno[] = [];
-    alunoAtual:KnockoutObservable<Aluno> = ko.observable(new Aluno(""));
+    alunoAtual:Aluno;
 
     nomeAtual:KnockoutObservable<string>;
     contactoAtual: KnockoutObservable<string>;
     tipoContactoAtual: KnockoutObservable<TipoContacto>;
+    contactos: KnockoutObservable<Contacto[]>;
     
-    carregaAlunos(){
-        let aluno1 = new Aluno("Luis");
-        aluno1.adicionaContacto(Contacto.criaEmail("teste@mail.pt"));
-        aluno1.adicionaContacto(Contacto.criaTelefone("123123123"));
-        this.alunos.push(aluno1);
-        aluno1 = new Aluno("Rita");
-        aluno1.adicionaContacto(Contacto.criaEmail("teste@mail.pt"));
-        aluno1.adicionaContacto(Contacto.criaTelefone("123123123"));
-        this.alunos.push(aluno1);
+    constructor(private servico: ServicoAlunos){
+         this.servico.obtemTodos()
+            .then(als => this.alunos = als);
     }
     
     preparaBindings(){
@@ -30,9 +26,15 @@ export class Principal{
             required: true
         });
         this.tipoContactoAtual = ko.observable(TipoContacto.Telefone);
+        this.contactos = ko.observable([]);
     }
 
-    
-
-    
+    selecionaAluno(aluno: Aluno){
+        this.alunoAtual = aluno;
+        
+        this.nomeAtual(this.alunoAtual.nome);
+        this.contactoAtual("");
+        this.tipoContactoAtual(TipoContacto.Email);
+        this.contactos(this.alunoAtual.contactos);
+    }
 }
