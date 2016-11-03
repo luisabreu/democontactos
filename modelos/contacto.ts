@@ -4,6 +4,9 @@ export class Contacto{
     constructor(public registo: string, public tipoContacto:TipoContacto){}
 
     igual(ct: Contacto){
+        if(!ct){
+            return false;
+        }
         return this.registo === ct.registo &&
                 this.tipoContacto === ct.tipoContacto;
     }
