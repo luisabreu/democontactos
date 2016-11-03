@@ -3,6 +3,10 @@
 export class Contacto{    
     constructor(public registo: string, public tipoContacto:TipoContacto){}
 
+    igual(ct: Contacto){
+        return this.registo === ct.registo &&
+                this.tipoContacto === ct.tipoContacto;
+    }
     static criaTelefone(registo: string){        
         return new Contacto(registo, TipoContacto.Telefone);
     }
