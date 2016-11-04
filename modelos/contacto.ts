@@ -15,6 +15,10 @@ export class Contacto{
         return this.tipoContacto === TipoContacto.Telefone;
     }
 
+    duplica(){
+        return new Contacto(this.registo, this.tipoContacto);
+    }
+
     static criaTelefone(registo: string){        
         return new Contacto(registo, TipoContacto.Telefone);
     }

@@ -24,6 +24,10 @@ export class Aluno{
         this.contactos.splice(pos, 1);
     }
 
+    obtemContactosParaEdicao(){
+        return this.contactos.map( c => c.duplica() );
+    }
+
     existeContacto(contacto:Contacto){
         let pos = this.contactos.findIndex(c => c.igual(contacto));
 

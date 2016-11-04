@@ -5,16 +5,20 @@ import {Aluno, Contacto, TipoContacto} from "../modelos/index";
 import {ServicoAlunos} from "../servicos/servico-alunos";
 
 export class Principal{
-     alunos: KnockoutObservableArray<Aluno>;
+    alunos: KnockoutObservableArray<Aluno>;
     alunoAtual:Aluno;
 
     nomeAtual:KnockoutObservable<string>;
     contactoAtual: KnockoutObservable<string>;
     tipoContactoAtual: KnockoutObservable<TipoContacto>;
+    tipoContactoAtualEdicao: any;
     contactos: KnockoutObservableArray<Contacto>;
+
+    emEdicao: boolean;
     
     constructor(private servico: ServicoAlunos){
          this.preparaBindings();
+         this.iniciaAluno();
          this.servico.obtemTodos()
             .then(als => this.alunos(als) );
     }
@@ -27,34 +31,81 @@ export class Principal{
         this.contactoAtual = ko.observable("").extend({
             required: true
         });
+        
         this.tipoContactoAtual = ko.observable(TipoContacto.Telefone);
+        
+        this.tipoContactoAtualEdicao = ko.computed({
+            read: () => this.tipoContactoAtual().toString(),
+            write: (val) => this.tipoContactoAtual(parseInt(val))
+        }); 
+
         this.contactos = ko.observableArray([]);
     }
 
     selecionaAluno(aluno: Aluno){
+        if(this.emEdicao){
+            alert("Por favor, termine a edição do outro contacto.");
+            return;
+        }
         this.alunoAtual = aluno;
+        this.alunos.remove(this.alunoAtual);
         
-        this.nomeAtual(this.alunoAtual.nome);
-        this.contactoAtual("");
-        this.tipoContactoAtual(TipoContacto.Email);
-        this.contactos(this.alunoAtual.contactos);
+        this.iniciaFormularioEdicao();
+        this.emEdicao = true;
     }
 
     removeContacto(ct:Contacto){
         if(!ct){
             return ;
         }
-        this.alunoAtual.removeContacto(ct);
-        this.contactos(this.alunoAtual.contactos);
-        const aux = this.alunos();
-        this.alunos([]);
-        this.alunos(aux);
+        this.contactos.remove(ct);      
     }
 
-    limpaFormulario(){
-        this.nomeAtual("");
-        this.contactoAtual("");
+    adicionaContacto(){
+        var ct = new Contacto(this.contactoAtual(), this.tipoContactoAtual());
+        this.contactos.push(ct);
+        this.limpaCamposContacto();
+    }
+
+    iniciaFormularioEdicao(){
+        this.nomeAtual(this.alunoAtual.nome);        
+        this.iniciaFormularioContactos();
+    }
+
+    iniciaFormularioContactos(){
+        this.limpaCamposContacto();
+        this.contactos(this.alunoAtual.obtemContactosParaEdicao());
+    }
+    
+    limpaCamposContacto(){
         this.tipoContactoAtual(TipoContacto.Email);
-        this.contactos([]);
+        this.contactoAtual("");
+    }
+
+    cancelaEdicao(){
+        if(!this.emEdicao){
+            return;
+        }
+        this.alunos.push(this.alunoAtual);
+        
+        this.iniciaAluno();
+        this.emEdicao = false;
+    }
+
+    gravaContacto(){
+        if(!this.alunoAtual){
+            return;
+        }
+        this.alunoAtual.nome = this.nomeAtual();
+        this.alunoAtual.contactos = this.contactos();
+        this.alunos.push(this.alunoAtual);
+
+        this.iniciaAluno();
+        this.emEdicao = false;        
+    }
+
+    iniciaAluno(){
+        this.alunoAtual = new Aluno("");
+        this.iniciaFormularioEdicao();
     }
 }
