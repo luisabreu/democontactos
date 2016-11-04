@@ -34,10 +34,20 @@ export class Principal{
         })
         this.filtro = ko.observable("");
         this.nomeAtual = ko.observable("").extend({
-            required: true
+            required: {message: "O nome do aluno é de preenchimento obrigatório."}
         });
+        
         this.contactoAtual = ko.observable("").extend({
-            required: true
+            required: {message: "O campo contacto é de preenchimento obrigatório."},
+            email: {
+                message: "O email não está no formato correto.",
+                onlyIf: () => this.tipoContactoAtual() === TipoContacto.Email
+            },
+            pattern: {
+                message: "O formato do número de telefone não está correto.",
+                params: "^\\d{9}$",
+                onlyIf: () => this.tipoContactoAtual() === TipoContacto.Telefone
+            }
         });
         
         this.tipoContactoAtual = ko.observable(TipoContacto.Telefone);

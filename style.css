@@ -56,3 +56,13 @@ body{
     bottom: 20px;
     right:20px;
 }
+
+.erro{
+    border-left: 3px solid #a94442; /* red */
+}
+
+.infoErro{
+    font-size: smaller;
+    color: #a94442;
+    font-weight: bolder; 
+}

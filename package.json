@@ -7,8 +7,7 @@
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
     "knockout": "^3.4.0",
-    "knockout-mapping": "^2.6.0",
-    "knockout-validation": "^0.1.1",
+    "knockout.validation": "^2.0.3",
     "systemjs": "^0.19.40",
     "traceur": "0.0.111"
   },

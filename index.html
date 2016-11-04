@@ -56,11 +56,11 @@
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-10">
                             <input type="text" name="nome" id="nome" class="form-control"
-                                data-bind="value: nomeAtual"
+                                data-bind="value: nomeAtual, valueUpdate: 'keydown', css: {'erro': !nomeAtual.isValid() }"
                                 placeholder="Introduza o nome do contacto">
                         </div>
                     </div>
-                    <hr>
+                    <hr> 
                     <h4>Lista de contactos</h4>
                     <div class="form-group">
                         <label class="control-label col-sm-2">Tipo:</label>
@@ -76,11 +76,11 @@
                         </div>
                         <div class="col-sm-6">
                             <input type="text" name="registo" id="registo"
-                                data-bind="value: contactoAtual" 
+                                data-bind="value: contactoAtual, valueUpdate: 'keydown', css: {'erro': !contactoAtual.isValid() }" 
                                 class="form-control" placeholder="Introduza o contacto">
                         </div>
                         <div class="col-sm-1">
-                            <button class="btn btn-default">
+                            <button class="btn btn-default" data-bind="enable: contactoAtual.isValid()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                             </button>
                         </div>
@@ -112,7 +112,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-right bts">
                         <button class="btn btn-default" 
-                            data-bind="click: $root.gravaContacto.apply($root)">
+                            data-bind="click: $root.gravaContacto.apply($root), enable: nomeAtual.isValid()">
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                         <button class="btn btn-default" 
@@ -127,9 +127,9 @@
     
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/knockout/build/output/knockout-latest.js"></script>
-    <script src="node_modules/knockout-validation/dist/knockout-validation.js"></script>
-    <script src="node_modules/knockout-mapping/dist/knockout.mapping.min.js"></script>
+    <script src="node_modules/knockout/build/output/knockout-latest.js"></script>    
+    <script src="node_modules/knockout.validation/dist/knockout.validation.min.js"></script>
+    
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="js/systemjs.config.js"></script>
     <script>
