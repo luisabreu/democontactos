@@ -5,13 +5,17 @@ import {Aluno, Contacto, TipoContacto} from "../modelos/index";
 import {ServicoAlunos} from "../servicos/servico-alunos";
 
 export class Principal{
-    alunos: KnockoutObservableArray<Aluno>;
+    filtro: KnockoutObservable<string>;
+    
+    alunosFiltrados: KnockoutComputed<Aluno[]>;
+    alunos: KnockoutObservableArray<Aluno>;    
+
     alunoAtual:Aluno;
 
     nomeAtual:KnockoutObservable<string>;
     contactoAtual: KnockoutObservable<string>;
     tipoContactoAtual: KnockoutObservable<TipoContacto>;
-    tipoContactoAtualEdicao: any;
+    tipoContactoAtualEdicao: KnockoutComputed<string>;
     contactos: KnockoutObservableArray<Contacto>;
 
     emEdicao: boolean;
@@ -25,6 +29,10 @@ export class Principal{
     
     preparaBindings(){
         this.alunos = ko.observableArray([]);
+        this.alunosFiltrados = ko.computed({
+            read: () => this.alunos().filter(a => a.nome.toUpperCase().startsWith(this.filtro().toUpperCase()))
+        })
+        this.filtro = ko.observable("");
         this.nomeAtual = ko.observable("").extend({
             required: true
         });
@@ -40,6 +48,7 @@ export class Principal{
         }); 
 
         this.contactos = ko.observableArray([]);
+
     }
 
     selecionaAluno(aluno: Aluno){
