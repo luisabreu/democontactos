@@ -10,6 +10,11 @@ export class Contacto{
         return this.registo === ct.registo &&
                 this.tipoContacto === ct.tipoContacto;
     }
+
+    eTelefone(){        
+        return this.tipoContacto === TipoContacto.Telefone;
+    }
+
     static criaTelefone(registo: string){        
         return new Contacto(registo, TipoContacto.Telefone);
     }

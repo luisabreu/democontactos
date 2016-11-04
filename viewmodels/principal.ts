@@ -5,13 +5,13 @@ import {Aluno, Contacto, TipoContacto} from "../modelos/index";
 import {ServicoAlunos} from "../servicos/servico-alunos";
 
 export class Principal{
-    alunos: KnockoutObservable<Aluno[]>;
+     alunos: KnockoutObservableArray<Aluno>;
     alunoAtual:Aluno;
 
     nomeAtual:KnockoutObservable<string>;
     contactoAtual: KnockoutObservable<string>;
     tipoContactoAtual: KnockoutObservable<TipoContacto>;
-    contactos: KnockoutObservable<Contacto[]>;
+    contactos: KnockoutObservableArray<Contacto>;
     
     constructor(private servico: ServicoAlunos){
          this.preparaBindings();
@@ -20,7 +20,7 @@ export class Principal{
     }
     
     preparaBindings(){
-        this.alunos = ko.observable([]);
+        this.alunos = ko.observableArray([]);
         this.nomeAtual = ko.observable("").extend({
             required: true
         });
@@ -28,7 +28,7 @@ export class Principal{
             required: true
         });
         this.tipoContactoAtual = ko.observable(TipoContacto.Telefone);
-        this.contactos = ko.observable([]);
+        this.contactos = ko.observableArray([]);
     }
 
     selecionaAluno(aluno: Aluno){
@@ -38,5 +38,23 @@ export class Principal{
         this.contactoAtual("");
         this.tipoContactoAtual(TipoContacto.Email);
         this.contactos(this.alunoAtual.contactos);
+    }
+
+    removeContacto(ct:Contacto){
+        if(!ct){
+            return ;
+        }
+        this.alunoAtual.removeContacto(ct);
+        this.contactos(this.alunoAtual.contactos);
+        const aux = this.alunos();
+        this.alunos([]);
+        this.alunos(aux);
+    }
+
+    limpaFormulario(){
+        this.nomeAtual("");
+        this.contactoAtual("");
+        this.tipoContactoAtual(TipoContacto.Email);
+        this.contactos([]);
     }
 }

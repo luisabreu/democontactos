@@ -21,7 +21,7 @@ export class Aluno{
         if(pos < 0 ){
             return;
         }
-        this.contactos.splice(pos);
+        this.contactos.splice(pos, 1);
     }
 
     existeContacto(contacto:Contacto){
