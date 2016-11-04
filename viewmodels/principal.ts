@@ -43,7 +43,9 @@ export class Principal{
         this.tipoContactoAtual = ko.observable(TipoContacto.Telefone);
         
         this.tipoContactoAtualEdicao = ko.computed({
-            read: () => this.tipoContactoAtual().toString(),
+            read: () => {
+                return this.tipoContactoAtual().toString()
+            },
             write: (val) => this.tipoContactoAtual(parseInt(val))
         }); 
 
@@ -63,6 +65,14 @@ export class Principal{
         this.emEdicao = true;
     }
 
+    novoContacto(){
+         if(this.emEdicao){
+            alert("Por favor, termine a edição do outro contacto.");
+            return;
+        }
+        this.iniciaAluno();
+    }
+
     removeContacto(ct:Contacto){
         if(!ct){
             return ;
@@ -74,11 +84,13 @@ export class Principal{
         var ct = new Contacto(this.contactoAtual(), this.tipoContactoAtual());
         this.contactos.push(ct);
         this.limpaCamposContacto();
+        $("#registo").focus();
     }
 
     iniciaFormularioEdicao(){
         this.nomeAtual(this.alunoAtual.nome);        
         this.iniciaFormularioContactos();
+        $("#nome").focus();
     }
 
     iniciaFormularioContactos(){
@@ -87,7 +99,7 @@ export class Principal{
     }
     
     limpaCamposContacto(){
-        this.tipoContactoAtual(TipoContacto.Email);
+        this.tipoContactoAtual(TipoContacto.Telefone);
         this.contactoAtual("");
     }
 
