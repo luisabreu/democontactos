@@ -12,7 +12,7 @@ let servico = new ServicoAlunos();
 let principal = new Principal(servico);
 
 //prepara novo click handler
-ko.bindingHandlers.confirmClick = {
+(<any>ko.bindingHandlers).confirmClick = {
     init: function(element, valueAccessor, allBindings, viewModel) {
         var value = valueAccessor();
         var message = ko.unwrap(value.message);

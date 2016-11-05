@@ -31,9 +31,6 @@
                 <ul id="lista" class="list-unstyled margens" data-bind="foreach: alunosFiltrados">
                     <li>
                         <div class="col-xs-12">
-                            <div class="checkbox">
-                                <input type="checkbox">
-                            </div>
                             <a href="#" data-bind="click: $parent.selecionaAluno.bind($parent)">
                                 <span class="text-left" data-bind="text: nome"></span>
                                 <span class="badge" data-bind="text: contactos.length"></span>
@@ -42,6 +39,7 @@
                     </li>                    
                 </ul>
             </div>
+           
             <button class="btn btn-primary btn-circle btn-lg fundo" data-bind="click: novoContacto">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
@@ -53,8 +51,8 @@
                 <form action="." class="form-horizontal" 
                     data-bind="submit: adicionaContacto">
                     <div class="form-group">
-                        <label for="nome" class="col-sm-2 control-label">Nome:</label>
-                        <div class="col-sm-10">
+                        <label for="nome" class="col-xs-2 control-label">Nome:</label>
+                        <div class="col-xs-10">
                             <input type="text" name="nome" id="nome" class="form-control"
                                 data-bind="value: nomeAtual, valueUpdate: 'keydown', css: {'erro': !nomeAtual.isValid() }"
                                 placeholder="Introduza o nome do contacto">
@@ -63,8 +61,8 @@
                     <hr> 
                     <h4>Lista de contactos</h4>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Tipo:</label>
-                        <div class="col-sm-3">                       
+                        <label class="control-label col-xs-2">Tipo:</label>
+                        <div class="col-xs-3">                       
                             <label class="radio-inline">
                                 <input type="radio" name="tipo" id="tipoTelefone" value="0" 
                                 data-bind="checked: tipoContactoAtualEdicao"> Tel.
@@ -74,19 +72,19 @@
                                 data-bind="checked: tipoContactoAtualEdicao"> Email
                             </label>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-xs-6">
                             <input type="text" name="registo" id="registo"
                                 data-bind="value: contactoAtual, valueUpdate: 'keydown', css: {'erro': !contactoAtual.isValid() }" 
                                 class="form-control" placeholder="Introduza o contacto">
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-xs-1">
                             <button class="btn btn-default" data-bind="enable: contactoAtual.isValid()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                             </button>
                         </div>
                     </div>                  
                 </form>
-                
+                <div class="row">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -108,6 +106,7 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-right bts">

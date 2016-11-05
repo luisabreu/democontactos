@@ -3,12 +3,9 @@ body{
     margin:0px;
 }
 
+
 .left-border{
     border-left: 2px solid darkblue;
-}
-
-.margens{
-    padding-left: 20px;
 }
 
 .header{
@@ -19,15 +16,24 @@ body{
     margin-right:0px;
 }
 
-.sidebar{
-    padding-top: 40px;
-    position: fixed;
-    left: 0px;
-    top: 50px;
-    bottom:0px;
-    display: block;
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
+
+.sidebar {
+  position: relative;
+  display: inherit;
+  min-height: 200px;
+}
+
+@media (min-width: 768px) {
+    .sidebar{
+        padding-top: 40px;
+        position: fixed;
+        left: 0px;
+        top: 50px;
+        bottom:0px;
+        display: block;
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
 }
 
 .espaco-esquerda{
@@ -44,9 +50,9 @@ body{
   border-radius: 15px;
 }
 .btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 10px 16px;
+  width: 40px;
+  height: 40px;
+  padding: 5px 11px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 25px;

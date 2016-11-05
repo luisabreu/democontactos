@@ -10,9 +10,8 @@
     },
     "exclude": [
        "node_modules",
-        "wwwroot",
-        "typings/index",
-        "typings/index.d.ts"
+        "js",
+        "typings"
     ]
 
 }
