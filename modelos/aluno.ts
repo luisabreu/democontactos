@@ -28,7 +28,7 @@ export class Aluno{
         return this.contactos.map( c => c.duplica() );
     }
 
-    existeContacto(contacto:Contacto){
+    private existeContacto(contacto:Contacto){
         let pos = this.contactos.findIndex(c => c.igual(contacto));
 
         return pos >= 0;
