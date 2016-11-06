@@ -123,7 +123,7 @@ export class Principal{
         this.emEdicao = false;
     }
 
-    gravaContacto(){
+    gravaEdicao(){
         if(!this.alunoAtual){
             return;
         }
